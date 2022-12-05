@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+class %Table% extends Model
+{
+    protected $table = '%table%';
+    use SoftDeletes;
+    
+    %relation%
+    
+      protected $fillable = [
+       %fillable%
+    ];
+	
+      public static $modelData=[
+        
+         %fillablea%
+        ];
+		public static $tabHeadsG=[%fillable%];
+		public static $formDataG=[%fillable%];
+		public static $validator= 
+               %fillablev%
+            ;
+		public static $subModules=%submodule%;
+			public static $actions=%action%;
+		public static $access=%access%;
+		public static $pType=%ptype%;
+		
+		public static $formType=%formType%;
+		public static function getSelectData(){
+			$options=[];
+		 %options%
+	
+
+		return $options;
+		}
+		%code%
+    
+}

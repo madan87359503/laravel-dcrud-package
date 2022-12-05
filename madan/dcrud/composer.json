@@ -1,0 +1,16 @@
+{
+    "name": "madan/dcrud",
+    "description": "Dynamic crud with customizable dashboard",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Madan\\Dcrud\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Madan"
+        }
+    ],
+    "require": {}
+}
