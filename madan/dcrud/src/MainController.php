@@ -30,6 +30,10 @@ class MainController extends Controller
      */
     public function index(Request $req,$p='',$m='')
     {
+                        
+			$mode='App\\'.'Models\\'.ucfirst($m);
+                        
+                         if(!File::exists(base_path().'/app/Models/'.ucfirst($m).'.php'))
 			$mode='Madan\\'.ucfirst($p).'\\'.'Models\\'.ucfirst($m);
 			if(!in_array(Auth::user()->role_name,$mode::$access)){
 				
@@ -83,7 +87,7 @@ class MainController extends Controller
 
 	}
 	  public static function generateCO($req){
-		 // dd($req);
+		 //dd($req);
         $use='';
         $update='';
         $index='';
@@ -115,7 +119,7 @@ class MainController extends Controller
 		 $api=File::get(base_path().'/routes/web.php');
          if(strpos($route,'use App\Http\Controllers\\'.$cname)==''){
 			 
-        $route.=' use App\Http\Controllers\\'.$cname.'; Route::post(\''.$req['name'].'\',['.$cname.'::class,\'update\'])->name(\'update'.$req['name'].'\'); Route::get(\''.$req['name'].'\',['.$cname.'::class,\'index\'])->name(\''.$req['name'].'\');';
+        $route.=' use App\Http\Controllers\\'.$cname.'; Route::post(\''.$req['name'].'\',['.$cname.'::class,\'update\'])->name(\'update'.$req['name'].'\'); Route::get(\''.$req['name'].'\',['.$cname.'::class,\'index\'])->name(\''.$req['name'].'\');'."\n";
          }
          File::put(base_path().'/routes/web.php',$route);
          $controller=File::get(base_path().'/buildTemplate/controller');
@@ -135,10 +139,13 @@ class MainController extends Controller
 		 $cova->columns=$va[1];
 		 $cova->save();
 			 }
-			 $api.="Route::apiResources(['api/$va[0]' => 'App\Http\Controllers\API\UserController']);"; 
-			   File::put(base_path().'/routes/web.php',$api);
+			 $api.="Route::apiResources(['api/$va[0]' => 'App\Http\Controllers\API\UserController']);\n"; 
+			  if(strpos($route,"Route::apiResources(['api/$va[0]' => 'App\Http\Controllers\API\UserController']);\n")==''){
+	
+                         File::put(base_path().'/routes/web.php',$api);
+                          }
               $use.=' use App\Models\\'.ucfirst($va[0]).'; '; 
-             \App\Http\Controllers\HomeController::checkTable($va[0]);
+              MainController::checkTable($va[0]);
              $update.=' $u'.$va[0].'= '.ucfirst($va[0]).'::insert($req[\'data\']);';
              $index.=' $'.$va[0].'='.ucfirst($va[0]);
              $comp.=',\''.$va[0].'\'';
@@ -153,7 +160,7 @@ class MainController extends Controller
                      continue;
 					
                      $index.=','.explode(' ',$c)[0];
-                     \App\Http\Controllers\HomeController::checkCol($va[0],explode(' ',$c)[0]);
+                     MainController::checkCol($va[0],explode(' ',$c)[0]);
                      if(isset(explode(' ',$c)[1]))
                      $filter.='->where("'.explode(' ',$c)[0].'","'.explode(' ',$c)[1].'","'.explode(' ',$c)[2].'")';
 				
@@ -162,7 +169,7 @@ class MainController extends Controller
                  
              }else
              $index.='::get();';
-		  \App\Http\Controllers\HomeController::checkModel($va[0],$va[1]);
+         MainController::checkModel($va[0],$va[1]);
              
          }
          
@@ -178,7 +185,7 @@ class MainController extends Controller
            $controller=str_replace('%update%',$update,$controller);
          File::put(base_path().'/app/Http/Controllers/'.$cname.'.php',$controller);
         
-                         File::put(base_path().'/resources/views/'.$req['name'].'.blade.php',str_replace('&gt;','>',$req['content']));
+                         File::put(base_path().'/resources/views/'.($req['path']==''?'':($req['path'].'/')).$req['name'].'.blade.php',str_replace('&gt;','>',$req['content']));
     }
         public static function checkModel($m,$c=''){
         

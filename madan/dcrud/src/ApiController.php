@@ -3,6 +3,7 @@
 namespace Madan\Dcrud;
 
 
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -27,6 +28,8 @@ public function __construct()
     {
 	if(Auth::check()){
 		$filter=explode('&',$request->get('filter'));
+                	$mode='App\\'.'Models\\'.ucfirst($m);
+                         if(!File::exists(base_path().'/app/Models/'.ucfirst($m).'.php'))
 		$mode='Madan\\'.ucfirst($p).'\\Models\\'.ucfirst($m);
 		if(!in_array(auth()->user()->role_name,$mode::$access)){
 				
@@ -76,7 +79,8 @@ public function __construct()
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request,$p,$m)
-    {
+    {$mode='App\\'.'Models\\'.ucfirst($m);
+                         if(!File::exists(base_path().'/app/Models/'.ucfirst($m).'.php'))
 		$mode='Madan\\'.ucfirst($p).'\\Models\\'.ucfirst($m);
 		if(Auth::check()){
 		$filter=explode('&',$request->get('filter'));
@@ -131,7 +135,8 @@ public function __construct()
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,$p,$m,$id)
-    {
+    {$mode='App\\'.'Models\\'.ucfirst($m);
+                         if(!File::exists(base_path().'/app/Models/'.ucfirst($m).'.php'))
 		$mode='Madan\\'.ucfirst($p).'\\Models\\'.ucfirst($m);
         $user = $mode::findOrFail($id);
 		if(!in_array(Auth::user()->role_name,$mode::$access)){
@@ -163,7 +168,8 @@ $data=[];
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $p,$m,$id)
-    {
+    {$mode='App\\'.'Models\\'.ucfirst($m);
+                         if(!File::exists(base_path().'/app/Models/'.ucfirst($m).'.php'))
 		$mode='Madan\\'.ucfirst($p).'\\Models\\'.ucfirst($m);
         if(Auth::check()){
 		$filter=explode('&',$request->get('filter'));

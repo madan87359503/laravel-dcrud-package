@@ -2,88 +2,32 @@
  
     <div @click='emitVal' style='overflow:auto;width:100%;min-height:600px;position:relative'>
         
-<div class='tools' ><button onclick="newdiv()">+ Div</button><button onclick='$(".selected").remove()'>Delete</button><button onclick='downdiv()'>&darr;</button>
-<button onclick='updiv()'>&uarr;</button>
-<button onclick='leftdiv()'>&larr;</button>
-<button onclick='rightdiv()'>&rarr;</button>
-<button onclick='hcenter()'>&#x268B;</button>
-<button onclick='center()'>&#9871;</button>
-<button onclick='setCSS("text-align","left")'>-__</button>
+<div class='tools' ><button type='button' onclick="newdiv()">+ Div</button><button type='button' onclick='removeDiv()'>Delete</button><button type='button' onclick='downdiv()'>&darr;</button>
+<button type='button' onclick='updiv()'>&uarr;</button>
+<button type='button' onclick='leftdiv()'>&larr;</button>
+<button type='button' onclick='rightdiv()'>&rarr;</button>
+<button type='button' onclick='hcenter()'>&#x268B;</button>
+<button type='button' onclick='center()'>&#9871;</button>
+<button type='button' onclick='setCSS("text-align","left")'>-__</button>
 
-<button onclick='setCSS("text-align","center")'>_-_</button>
-<button onclick='setCSS("text-align","right")'>__-</button>
+<button type='button' onclick='setCSS("text-align","center")'>_-_</button>
+<button type='button' onclick='setCSS("text-align","right")'>__-</button>
 
-<button onclick='$("#picked").append("<div></div>");$(".selected").clone().appendTo("#picked>div");$(".selected").removeClass("selected")'>PICK</button>
+<button type='button' onclick='$("#picked").append("<div></div>");$(".selected").clone().appendTo("#picked>div");$(".selected").removeClass("selected")'>PICK</button>
 
 <input type='color' onchange='$(".selected").css("color",this.value)' value='' class='cl'>
 
 <input type='color' value='' onchange='$(".selected").css("background-color",this.value)' class='bcl'>
 <input type='text' value='height' class='in1 hidden'>
-<button onclick='pnm(".in1","+")'> h+</button><button onclick='pnm(".in1","-")' >h-</button>
+<button type='button' onclick='pnm(".in1","+")'> h+</button><button type='button' onclick='pnm(".in1","-")' >h-</button>
 <input type='text' value='width' class='in2 hidden'>
-<button onclick='pnm(".in2","+")'> w+</button><button onclick='pnm(".in2","-")'>w-</button>
+<button type='button' onclick='pnm(".in2","+")'> w+</button><button type='button' onclick='pnm(".in2","-")'>w-</button>
 <input type='text' value='font-size' class='in3 hidden'>
-<button onclick='pnm(".in3","+")'> t+</button><button onclick='pnm(".in3","-")'>t-</button>
+<button type='button' onclick='pnm(".in3","+")'> t+</button><button type='button' onclick='pnm(".in3","-")'>t-</button>
 <input type='text' value='border-radius' class='in4 hidden'>
-<button onclick='pnm(".in4","+")'> r+</button><button onclick='pnm(".in4","-")'>r-</button>
+<button type='button' onclick='pnm(".in4","+")'> r+</button><button type='button' onclick='pnm(".in4","-")'>r-</button>
 
-<select onchange='makeres(this.value,300)'>
-    <option value=''>On Extra Small</option>
-    <option value='none'>Hide</option>
-    <option value='7'>7</option>
-    <option value='6'>6</option>
-    <option value='5'>5</option>
-    <option value='4'>4</option>
-    <option value='3'>3</option>
-    <option value='2'>2</option>
-    <option value='1'>1</option>
-</select>
-<select onchange='makeres(this.value,600)'>
-    <option value=''>On Mobile</option>
-    <option value='none'>Hide</option>
-    <option value='7'>7</option>
-    <option value='6'>6</option>
-    <option value='5'>5</option>
-    <option value='4'>4</option>
-    <option value='3'>3</option>
-    <option value='2'>2</option>
-    <option value='1'>1</option>
-</select>
-<select onchange='makeres(this.value,900)'>
-    <option value=''>On Medium</option>
-    <option value='none'>Hide</option>
-    <option value='7'>7</option>
-    <option value='6'>6</option>
-    <option value='5'>5</option>
-    <option value='4'>4</option>
-    <option value='3'>3</option>
-    <option value='2'>2</option>
-    <option value='1'>1</option>
-</select>
-<select onchange='makeres(this.value,1200)'>
-    <option value=''>On Large</option>
-    <option value='none'>Hide</option>
-    <option value='7'>7</option>
-    <option value='6'>6</option>
-    <option value='5'>5</option>
-    <option value='4'>4</option>
-    <option value='3'>3</option>
-    <option value='2'>2</option>
-    <option value='1'>1</option>
-</select>
-<select onchange='makeres(this.value,1500)'>
-    <option value=''>On Extra</option>
-    <option value='none'>Hide</option>
-    <option value='7'>7</option>
-    <option value='6'>6</option>
-    <option value='5'>5</option>
-    <option value='4'>4</option>
-    <option value='3'>3</option>
-    <option value='2'>2</option>
-    <option value='1'>1</option>
-</select>
-       
-<input id='pn' value='testpage' placeholder='Page Name' /><input id='pds' value='testpage-col1,col2' placeholder='Data Sources' /><button onclick='savepage()'>Save</button><button onclick='previewpage()'>Save & Preview</button>
+
  <textarea type='text' class='divtext' onchange='chtxt(this.value)' cols=30 rows=1></textarea>
  </div>
   <div class='float right animate-right hover-display-component right-box'>
@@ -93,13 +37,13 @@
 </div> 
     <div class='margin-top padding' id="appll">
      
-      <button onclick="$('.tabsc').hide();$('.componentlist').show()">Components</button>
+      <button type='button' onclick="$('.tabsc').hide();$('.componentlist').show()">Components</button>
       
-      <button onclick="$('.tabsc').hide();$('.pagelist').show()">Pages</button>
+      <button type='button' onclick="$('.tabsc').hide();$('.pagelist').show()">Pages</button>
       
-      <button onclick="$('.tabsc').hide();$('.filelist').show()">Media</button>
+      <button type='button' onclick="$('.tabsc').hide();$('.filelist').show()">Media</button>
       
-      <button onclick="$('.tabsc').hide();$('.formlist').show()">Form</button>
+      <button type='button' onclick="$('.tabsc').hide();$('.formlist').show()">Form</button>
       
       <li  v-if='post.type=="api"' class='componentlist tabsc' v-for="post of posts">
           <div onclick='pick(this)'>
@@ -125,13 +69,13 @@
       </li>
         <li v-if='post.type=="file"' class='filelist tabsc' v-for="post of posts">
           <div  >
-              <button onclick='pick(this)'>
+              <button type='button' onclick='pick(this)'>
                <span class='currentcontent hidden' :cname="`${post.name}`" :cdatasource="`${post.datasource}`">
                    <img :src="`${post.preview}`"  style='object-fit:cover;max-height:100%'>
        </span>
        Image
               </button>
-                <button onclick='pick(this)'>
+                <button type='button' onclick='pick(this)'>
                <span class='currentcontent hidden' :cname="`${post.name}`" :cdatasource="`${post.datasource}`">
                  <div style='border-radius:10px; padding:5px; border:1px solid green;max-width:max-content;'>
                   <a  :href="`${post.preview}`"  download>Download Now</a>
@@ -139,7 +83,7 @@
        </span>
        Download Button
               </button>
-                 <button onclick="setbg(this)">
+                 <button type='button' onclick="setbg(this)">
             <div class='hidden'  v-html='post.preview'  >
                 
             </div>
@@ -214,7 +158,7 @@
      </tbody>
      <tfoot>
          <tr>
-             <td colspan=2><button onclick='addnew()'>+</button></td>
+             <td colspan=2><button type='button' onclick='addnew()'>+</button></td>
          </tr>
      </tfoot>
  </table> 
@@ -231,7 +175,7 @@
      </tbody>
      <tfoot>
          <tr>
-             <td colspan=2><button onclick='addnewattr()'>+</button></td>
+             <td colspan=2><button type='button' onclick='addnewattr()'>+</button></td>
          </tr>
      </tfoot>
  </table> 
@@ -243,8 +187,8 @@
 
  
 
-<div class='fullpage'>
-    <div id='pagecontent' class='fullpage' onmousemove="myFunction(event)" onclick='clickedhere()'>
+<div class='fullpage' >
+    <div id='pagecontent' v-html='value' class='fullpage' onmousemove="myFunction(event)" onclick='clickedhere()'>
     
 </div>
 </div>
@@ -280,7 +224,7 @@
 emitVal(){
 console.log(this.value);
 		
-		this.$emit($('#pagecontent').html(), this.value);
+		this.$emit('input',$('#pagecontent').html());
 	}
     },
     mounted(){
@@ -296,7 +240,7 @@ this.$emit('input', this.value);
 </script>
 <style>
  
-#pagecontent > a {
+.fullpage a {
     pointer-events:none;
 }
  .selected{

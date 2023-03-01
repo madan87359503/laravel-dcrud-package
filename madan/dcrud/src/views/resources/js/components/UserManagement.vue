@@ -8,9 +8,9 @@
 
   <div class="">
   <div class="content-header row col-12">
-                    <div class='btn-group'>
+                    <div class='btn-group history'>
 					 
-                            <a class='btn btn-sm btn-success' @click.prevent="openModule(myapps,'')"><i class="fa fa-home" ></i> </a>
+                            <a class='btn btn-sm btn-success ' @click.prevent="openModule(myapps,'')"><i class="fa fa-home" ></i> </a>
 							
 							 <a  v-for='(ch,index) in moduleHistory' :class=" moduleHistory.length-1==index?'btn btn-sm btn-primary ':'browsed-history btn btn-sm btn-primary '"  @click.prevent="openModule(ch[0],ch[1],ch[2])" :style=" (moduleHistory.length-1==index ||index%2==1)?' ':'background:#586c7b'"> / {{ch[0].toUpperCase()}} 
 						
@@ -53,34 +53,35 @@
     <div  class="col-12"  v-if='ptype.showCrud!="no"'>
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">{{smName.toUpperCase()}}</h3>
-          <div class="card-tools">
+          <h4 class="card-title col-lg-11">{{smName.toUpperCase()}}</h4>
+          <div class="card-tools col-lg-1 ">
             <div class="input-group input-group-sm">
               <!-- Button "add new user". When clicked, it will call /showModal function (function to display modal pop up containing "add new user" form). -->
              
 			  <div class="btn-group">
                  
 					<button type="button" class="btn-sm btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <i class="fas fa-columns"></i>
+                      <i class="fa fa-columns"></i>
                     </button>
-					<div class="dropdown-menu dropdown-menu-right" role="menu" style="position: absolute; will-change: transform; transform: translate3d(46px, -14px, 0px);">
+					<div class="dropdown-menu dropdown-menu-right" role="menu" style="position: absolute; will-change: transform; transform: translate3d(46px, -14px, 0px);width:max-content">
 						  <form>
 						
 						<div class='card-header' style='padding:5px'>
 					<h6>Show/Hide Columns</h6>
 					
 						</div>
-						<div class='card-body' style='padding:5px'>
+						<div class='card-body' style='padding:5px;'>
 					 <div  v-for="tabHead in tabHeads" style='max-height:25PX;padding:5px'>
 					  <label  >{{tabHead.toUpperCase()}}</label>
-					   <displayswitch-type  class='col-sm-6' style='left: 100px;
-    top: -33px;TRANSFORM: SCALE(1) !important;' v-model='formType[tabHead].tablehead'    :namee='tabHead+"s"'></displayswitch-type>
+					   <displayswitch-type  class='col-sm-6' style='left: 20px;
+        top: -6px;
+    width: 35px;TRANSFORM: SCALE(1) !important;' v-model='formType[tabHead].tablehead'    :namee='tabHead+"s"'></displayswitch-type>
 					</div>
                      </div>
 					  </form>
                     </div>
 					 
-					 <button class="btn-sm btn btn-danger"  @click.prevent="showModal"><i class="fas fa-plus"></i></button>
+					 <button class="btn-sm btn btn-danger"  @click.prevent="showModal"><i class="fa fa-plus"></i></button>
                    
 					 
 			 
@@ -110,7 +111,7 @@
 				</div>
 				<div class="input-group input-group-xs" :style='formType[tabHead].searchableforms?"width:"+(tabHead.length*10+50*formType[tabHead].sortale)+"px":"display:none"'>
                  
-				 <component v-bind:is='formType[tabHead].type+"-type"'  v-model="searchform['filter__'+tabHead]"  :placeholder='"search "+tabHead' :name='"filter__"+tabHead' :namee='"filter__"+tabHead' :options="options[tabHead]" v-bind:smName='smName' @input='getUsers()'></component>
+				 <component style='zoom:70%' v-bind:is='formType[tabHead].type+"-type"'  v-model="searchform['filter__'+tabHead]"  :placeholder='"search "+tabHead' :name='"filter__"+tabHead' :namee='"filter__"+tabHead' :options="options[tabHead]" v-bind:smName='smName' @input='getUsers()'></component>
          
 				 
                 
@@ -145,7 +146,7 @@
                     <i class="fa fa-trash"></i>
                   </a>
                
-				  <sub-modules :submodules='subModules' :id='user.id' ></sub-modules>	</td>
+				  <sub-modules class='btn-group' :submodules='subModules' :id='user.id' :modFunc='openModule'></sub-modules>	</td>
               </tr> 
             </tbody>
           </table>  
@@ -445,9 +446,10 @@ table thead, table tbody tr {
   li{
   list-style:none;
   }
-  .card-title{
-	margin-bottom:0px !important;
+  .card-header , .card-title{
+	padding-bottom: 0px !important;
   }
+
   
   .browsed-history{
   content-visibility:hidden;
@@ -468,4 +470,9 @@ left: 15px;
   .hidden{display:none}
 
 .min-h-75{min-height:75%;height:500px;max-height:100%;} 
+
+.history{
+color:white !important;
+margin-bottom:10px;
+}
 </style>

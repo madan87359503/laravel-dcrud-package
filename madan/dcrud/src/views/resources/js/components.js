@@ -6,10 +6,18 @@ Vue.component('text-type', {
     >
   `
 }); 
+Vue.component('textarea-type', {
+  props: ['value'],
+  template: `<textarea rows=10 class="form-control comp-theme"
+      v-bind:value="value" v-on:input="$emit('input', $event.target.value)"
+      
+    ></textarea>
+  `
+}); 
 Vue.component('buttoncomp', {
   props: ['smName','filter','name','modFunc'],
-  template: `<button v-else class="info-box" @click.prevent="openMod(smName,filter)" style="min-height: 50px;border: 1px;font-size: 19px;font-weight: 600;color: #3f474e;">
-              <span class="info-box-icon bg-danger" style='max-width:max-content'><i class="far fa-star"></i></span>
+  template: `<button v-else class="btn btn-success" @click.prevent="openMod(smName,filter)" style="min-height: 50px;padding:20px;margin:10px;font-size: 19px;font-weight: 600;width:100%;">
+              
 
               <div class="info-box-content">
                 <span class="info-box-text">{{name}}</span>
@@ -240,17 +248,17 @@ Vue.component('crud', {
    template: `
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">{{name}}</h3>
-          <div class="card-tools">
+          <h4 class="card-title col-lg-11"  v-on:click='getUsers()'>{{name}}</h4>
+          <div class="card-tools col-lg-1 ">
             <div class="input-group input-group-sm">
               <!-- Button "add new user". When clicked, it will call /showModal function (function to display modal pop up containing "add new user" form). -->
              
 			  <div class="btn-group">
                  
 					<button type="button" class="btn-sm btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <i class="fas fa-columns"></i>
+                      <i class="fa fa-columns"></i>
                     </button>
-					<div class="dropdown-menu dropdown-menu-right" role="menu" style="position: absolute; will-change: transform; transform: translate3d(46px, -14px, 0px);">
+					<div class="dropdown-menu dropdown-menu-right" role="menu" style="position: absolute; will-change: transform; transform: translate3d(46px, -14px, 0px);width:max-content">
 						  <form>
 						
 						<div class='card-header' style='padding:5px'>
@@ -260,14 +268,15 @@ Vue.component('crud', {
 						<div class='card-body' style='padding:5px'>
 					 <div  v-for="tabHead in tabHeads" style='max-height:25PX;padding:5px'>
 					  <label  >{{tabHead.toUpperCase()}}</label>
-					   <displayswitch-type  class='col-sm-6' style='left: 100px;
-    top: -33px;TRANSFORM: SCALE(1) !important;' v-model='formType[tabHead].tablehead'    :namee='tabHead+"s"'></displayswitch-type>
+					   <displayswitch-type  class='col-sm-6' style='left: 20px;
+    top: -6px;
+    width: 35px;TRANSFORM: SCALE(1) !important;' v-model='formType[tabHead].tablehead'    :namee='tabHead+"s"'></displayswitch-type>
 					</div>
                      </div>
 					  </form>
                     </div>
 					 
-					 <button class="btn-sm btn btn-danger"  @click.prevent="showModal"><i class="fas fa-plus"></i></button>
+					 <button class="btn-sm btn btn-danger"  @click.prevent="showModal"><i class="fa fa-plus"></i></button>
                    
 					 
 			 
@@ -286,7 +295,7 @@ Vue.component('crud', {
             <thead>
               <tr>
 			  
-                <th v-for="tabHead in tabHeads" v-if='formType[tabHead].tablehead'  :style="'min-width : '+((tabHead.length * 22)>140?(tabHead.length * 22>250?'250':tabHead.length * 22):'140' )+'px !important;max-width:'+ ((tabHead.length*25)>340?'340': tabHead.length * 25) +'px' ">
+                <th v-for="tabHead in tabHeads" v-if='formType[tabHead].tablehead' >
 				<div class="input-group input-group-xs">
                  
                 {{tabHead.toUpperCase()}}<select  v-model="searchform['sort__'+tabHead]" class='btn-default' style='zoom:80%;' :name='"sort__"+tabHead' @input='getUsers' :class='formType[tabHead].sortale?"":"hidden"'>
@@ -298,7 +307,7 @@ Vue.component('crud', {
 				</div>
 				<div class="input-group input-group-xs" :style='formType[tabHead].searchableforms?"width:"+(tabHead.length*10+50*formType[tabHead].sortale)+"px":"display:none"'>
                  
-				 <component v-bind:is='formType[tabHead].type+"-type"'  v-model="searchform['filter__'+tabHead]"  :placeholder='"search "+tabHead' :name='"filter__"+tabHead' :namee='"filter__"+tabHead' :options="options[tabHead]" v-bind:smName='smName' @input='getUsers()'></component>
+				 <component v-bind:is='formType[tabHead].type+"-type"'  v-model="searchform['filter__'+tabHead]"  :placeholder='"search "+tabHead' :name='"filter__"+tabHead' :namee='"filter__"+tabHead' :options="options[tabHead]" v-bind:smName='smName' @input='getUsers()' style='zoom:77%'></component>
          
 				 
                 
@@ -334,8 +343,7 @@ Vue.component('crud', {
                   <a class='btn btn-sm btn-danger' href="" @click.prevent="deleteUser(user.id)">
                     <i class="fa fa-trash"></i>
                   </a>
-               <sub-modules :submodules='subModules' :id='user.id' ></sub-modules>
-				
+              		
 	</td>
               </tr> 
             </tbody>
@@ -345,7 +353,7 @@ Vue.component('crud', {
             <pagination :data="users" @pagination-change-page="getUsers"></pagination>
           </nav>      
         </div>
- <modelform :createUser='createUser' :updateUser='updateUser' :smName='smName' :formType='formType' :isFormCreateMode='isFormCreateUserMode' :options='options' :formData='formData' :form='form'></modelform>
+ <modelform :createUser='createUser' :updateUser='updateUser' :smName='smName' :formType='formType' :isFormCreateMode='isFormCreateUserMode' :options='options' :formData='formData' :form='form' :subModules='subModules'></modelform>
 	
  </div>
 
@@ -398,7 +406,7 @@ Vue.component('crud', {
 		this.cpage=page;
         axios.get(this.apiPath+this.smName, {
           params: {
-		  filter,
+		 filter: this.filter,
             page: page
           }
         }).then(data => {
@@ -478,7 +486,7 @@ Vue.component('crud', {
             title: this.smName+' updated successfully'
           })
 
-          this.getUsers();
+          this.getUsers(1,this.filter);
         }).catch(() => {
           console.log('transaction fail');
         });
@@ -507,7 +515,7 @@ Vue.component('crud', {
                 'success'
               )   
 
-              this.getUsers(); // reload table users
+              this.getUsers(1,this.filter); // reload table users
             }).catch(() => {
               // sweet alert fail
               swal.fire({
@@ -546,7 +554,7 @@ this.searchform= new Form();
 		this.allActions=data.data.actions,
 		this.ptype=data.data.pType,
 		this.formType=data.data.FormType,
-		this.getUsers(1,query)
+		this.getUsers(1,this.filter)
 		
         }).then( 
 		);
@@ -563,7 +571,7 @@ this.searchform[vuemodel]=modeldata
     created() {
       // Call /getUsers() function initially. 
       this.openModule(this.smName);
-      this.getUsers();
+      this.getUsers(1,this.filter);
     },
     mounted() {
 var $me=this;
@@ -571,13 +579,13 @@ var $me=this;
  window.onpopstate = function(event) {
         var mod=document.location.href.split('/');
         mod=mod[mod.length-1];
-        $me.openModule(mod);
+        $me.openModule('smName','filter');
    };
     }
 });
 
 Vue.component('modelform', {
-  props: ['createUser','updateUser','smName','formType','isFormCreateMode','options','formData','form'],
+  props: ['createUser','updateUser','smName','formType','isFormCreateMode','options','formData','form','subModules'],
    template: ` <!-- Modal containing dynamic form for adding/updating user details. -->
     <div class="modal fade" :id="'form'+smName" tabindex="-1" role="dialog" :aria-labelledby="'form'+smName" aria-hidden="true"> 
       <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -585,7 +593,8 @@ Vue.component('modelform', {
           <div class="modal-header">
             <!-- Show/hide headings dynamically based on /isFormCreateMode value (true/false) -->
             <h5 v-show="isFormCreateMode" class="modal-title" >Add new {{smName}}</h5>
-            <h5 v-show="!isFormCreateMode" class="modal-title" >Update {{smName}}</h5>
+            <h5 v-show="!isFormCreateMode" class="modal-title">Update {{smName}}</h5>
+    
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
@@ -597,6 +606,11 @@ Vue.component('modelform', {
 			<component v-bind:is='formType[md].type+"-type"'  v-model="form[md]"   :class="{ 'is-invalid': form.errors.has(md) }" :namee="md" :options="options[md]" v-bind:smName='smName' ></component>
             	<has-error :form="form" :field="md"></has-error>
 			</div>
+   <div v-show="!isFormCreateMode">
+    <div class='col-lg-12' v-for='(smName,name) in subModules' >
+        <crud :smName='name' :name='name' :filter='"filter__"+smName+"="+form["id"]' ></crud>
+    </div>
+    </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary" v-show="isFormCreateMode">Add {{smName}}</button>
@@ -703,9 +717,147 @@ mounted(){
 <div>
     
     
-    <a  v-for="(filter,subModule) in submodules" class='btn btn-warning btn-sm ' href="" @click.prevent="openMod(subModule,'filter__'+filter+'='+user.id)">{{subModule}}</a>
+    <a  v-for="(filter,subModule) in submodules" class='btn btn-warning btn-sm ' href="" @click.prevent="openMod(subModule,'filter__'+filter+'='+id)">{{subModule}}</a>
 			
     </div>
 
+`
+});
+
+
+Vue.component('navbar', {
+  props: ['navtype'],
+  
+        data(){
+              return {
+       apiPath:apipath,
+         navdata:[],
+       homeDir:homedir,
+       currentLoc:window.location.pathname,
+    }
+        },
+mounted(){
+
+
+
+	console.log('navbar mounted');
+  axios.get(this.apiPath+'navpanel?filter=filter__type%3d'+this.navtype+'%26sort__order%3dasc', {
+          params: {
+          
+          }
+        }).then(data => {
+            this.navdata=data.data.data
+        }).then(data=>{
+                   var setContentHeight = function () {
+        // reset height
+        $RIGHT_COL.css('min-height', $(window).height());
+
+        var bodyHeight = $BODY.outerHeight(),
+            footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
+            leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
+            contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
+
+        // normalize content
+        contentHeight -= $NAV_MENU.height() + footerHeight;
+
+        $RIGHT_COL.css('min-height', contentHeight);
+    };
+             $SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
+
+    $SIDEBAR_MENU.find('a').filter(function () {
+        return this.href == CURRENT_URL;
+    }).parent('li').addClass('current-page').parents('ul').slideDown(function () {
+        setContentHeight();
+    }).parent().addClass('active');
+        })
+        
+},
+methods:{
+  setActive(id){
+      var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
+       $BODY = $('body'),
+        $SIDEBAR_MENU = $('#sidebar-menu'),
+         $SIDEBAR_FOOTER = $('.sidebar-footer'),
+      $li=$('.nav-'+id);
+      
+          var setContentHeight = function () {
+        // reset height
+        $RIGHT_COL.css('min-height', $(window).height());
+
+        var bodyHeight = $BODY.outerHeight(),
+            footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
+            leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
+            contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
+
+        // normalize content
+        contentHeight -= $NAV_MENU.height() + footerHeight;
+
+        $RIGHT_COL.css('min-height', contentHeight);
+    };
+        var openUpMenu = function () {
+        $SIDEBAR_MENU.find('li:not(.current-page)').removeClass('active active-sm');
+        $SIDEBAR_MENU.find('li ul').slideUp();
+    }
+          if ($li.is('.active')) {
+            $li.removeClass('active active-sm');
+            $('ul:first', $li).slideUp(function () {
+                setContentHeight();
+            });
+        } else {
+            // prevent closing menu if we are on child menu
+            if (!$li.parent().is('.child_menu')) {
+                openUpMenu();
+            } else {
+                if ($BODY.is('nav-sm')) {
+                    if (!$li.parent().is('child_menu')) {
+                        openUpMenu();
+                    }
+                }
+            }
+
+            $li.addClass('active');
+
+            $('ul:first', $li).slideDown(function () {
+                setContentHeight();
+            });
+        }
+       $SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
+
+    $SIDEBAR_MENU.find('a').filter(function () {
+        return this.href == CURRENT_URL;
+    }).parent('li').addClass('current-page').parents('ul').slideDown(function () {
+        setContentHeight();
+    }).parent().addClass('active');
+
+      
+    // recompute content when resizing
+    $(window).smartresize(function () {
+        setContentHeight();
+    });
+
+    setContentHeight();
+
+    // fixed sidebar
+    if ($.fn.mCustomScrollbar) {
+        $('.menu_fixed').mCustomScrollbar({
+            autoHideScrollbar: true,
+            theme: 'minimal',
+            mouseWheel: { preventDefault: true }
+        });
+    }
+  }  
+},
+  template: `
+  <ul class='nav side-menu'>
+ <li v-for='(b,a) in navdata.filter(function(el){return (el.navpanel_name==null) })'  :class='$router.currentRoute.path.includes(b.webpath)?"current-page nav-"+b.id:"nav-"+b.id'>
+<a v-on:click='setActive(b.id)'  v-if='navdata.filter(function(el){return (el.navpanel_name==b.id)}).length>0' ><i :class="b.icon"></i> {{b.name}} <span class="fa fa-chevron-down"></span></a>
+<a v-else  :href="homeDir+b.webpath" ><i :class="b.icon"></i> {{b.name}} </a>
+<ul  class="nav child_menu" v-if='navdata.filter(function(el){return (el.navpanel_name==b.id)}).length>0'>
+     <li v-for='(c,d) in navdata.filter(function(el){return (el.navpanel_name==b.id)})' >
+    <a :href="homeDir+c.webpath" > {{c.name}} </a>
+    </li>
+    </ul>
+                  </li>
+</ul>
 `
 });

@@ -12,15 +12,15 @@ class Component extends Model
     
     
       protected $fillable = [
-       "name","datasource","content","type","preview","cactions_name","id"
+       "name","datasource","content","type","preview","cactions_name","id","publish","modules_title"
     ];
 	
       public static $modelData=[
         
-         "name"=>"","datasource"=>"","content"=>"","type"=>"","preview"=>"","cactions_name"=>"","id"=>""
+         "name"=>"","datasource"=>"","content"=>"","type"=>"","preview"=>"","cactions_name"=>"","id"=>"","publish"=>"","modules_title"=>""
         ];
-		public static $tabHeadsG=["name","datasource","content","type","preview","cactions_name","id"];
-		public static $formDataG=["name","datasource","content","type","preview","cactions_name","id"];
+		public static $tabHeadsG=["name","datasource","content","type","preview","cactions_name","id","publish","modules_title"];
+		public static $formDataG=["name","datasource","content","type","preview","cactions_name","id","publish","modules_title"];
 		public static $validator= 
                array (
   'name' => 'required|max:191',
@@ -30,11 +30,25 @@ class Component extends Model
   'preview' => 'max:19187695',
   'cactions_name' => 'max:99999999999999',
   'id' => 'max:88888888888888',
+  'publish' => 'max:191',
+  'modules_title' => 'max:213',
 )
             ;
 		public static $subModules=array (
 );
 			public static $actions=array (
+  'publish' => 
+  array (
+    'name' => 'Publish',
+    'bclass' => 'btn-success',
+    'update' => 'publish=published&afterupdate=updateComponent',
+    'state' => 'no',
+    'reverse' => 'true',
+    'namerev' => 'Publish again',
+    'bclassrev' => 'btn-info',
+    'updaterev' => 'publish=published',
+    'forms_name' => '1040',
+  ),
 );
 		public static $access=array (
   0 => '1',
@@ -45,8 +59,8 @@ class Component extends Model
   'name' => 
   array (
     'id' => 65,
-    'created_at' => '2021-11-02T07:59:42.000000Z',
-    'updated_at' => '2021-11-02T07:59:42.000000Z',
+    'created_at' => '2021-11-02T17:44:42.000000Z',
+    'updated_at' => '2021-11-02T17:44:42.000000Z',
     'deleted_at' => NULL,
     'models_name' => '51',
     'name' => 'name',
@@ -66,8 +80,8 @@ class Component extends Model
   'datasource' => 
   array (
     'id' => 66,
-    'created_at' => '2021-11-02T07:59:42.000000Z',
-    'updated_at' => '2021-11-02T07:59:42.000000Z',
+    'created_at' => '2021-11-02T17:44:42.000000Z',
+    'updated_at' => '2021-11-02T17:44:42.000000Z',
     'deleted_at' => NULL,
     'models_name' => '51',
     'name' => 'datasource',
@@ -87,8 +101,8 @@ class Component extends Model
   'content' => 
   array (
     'id' => 67,
-    'created_at' => '2021-11-02T07:59:42.000000Z',
-    'updated_at' => '2022-05-11T13:06:42.000000Z',
+    'created_at' => '2021-11-02T17:44:42.000000Z',
+    'updated_at' => '2023-01-12T22:13:12.000000Z',
     'deleted_at' => NULL,
     'models_name' => '51',
     'name' => 'content',
@@ -108,35 +122,35 @@ class Component extends Model
   'type' => 
   array (
     'id' => 68,
-    'created_at' => '2021-11-02T07:59:42.000000Z',
-    'updated_at' => '2021-11-02T07:59:42.000000Z',
+    'created_at' => '2021-11-02T17:44:42.000000Z',
+    'updated_at' => '2023-01-18T22:44:56.000000Z',
     'deleted_at' => NULL,
     'models_name' => '51',
     'name' => 'type',
     'createvalidator' => 'required|max:191',
     'updatevalidator' => 'required|max:191',
-    'type' => 'text',
+    'type' => 'select',
     'modeldata' => 1,
     'tablehead' => 1,
     'formdata' => 1,
     'fillable' => 1,
     'formclass' => 'col-lg-2',
     'defaultvalue' => NULL,
-    'options' => NULL,
+    'options' => '[\'page\',\'component\']',
     'sortale' => 0,
     'searchableforms' => 0,
   ),
   'preview' => 
   array (
     'id' => 69,
-    'created_at' => '2021-11-02T07:59:42.000000Z',
-    'updated_at' => '2022-05-11T16:01:34.000000Z',
+    'created_at' => '2021-11-02T17:44:42.000000Z',
+    'updated_at' => '2023-01-12T21:03:08.000000Z',
     'deleted_at' => NULL,
     'models_name' => '51',
     'name' => 'preview',
     'createvalidator' => 'max:19187695',
     'updatevalidator' => 'max:19187695',
-    'type' => 'text',
+    'type' => 'dropzone',
     'modeldata' => 1,
     'tablehead' => 1,
     'formdata' => 1,
@@ -150,8 +164,8 @@ class Component extends Model
   'cactions_name' => 
   array (
     'id' => 902,
-    'created_at' => '2021-12-29T14:12:20.000000Z',
-    'updated_at' => '2022-04-08T09:50:09.000000Z',
+    'created_at' => '2021-12-30T00:57:20.000000Z',
+    'updated_at' => '2022-04-08T19:35:09.000000Z',
     'deleted_at' => NULL,
     'models_name' => '51',
     'name' => 'cactions_name',
@@ -171,14 +185,14 @@ class Component extends Model
   'id' => 
   array (
     'id' => 903,
-    'created_at' => '2021-12-29T14:17:17.000000Z',
-    'updated_at' => '2022-05-11T12:58:02.000000Z',
+    'created_at' => '2021-12-30T01:02:17.000000Z',
+    'updated_at' => '2023-01-12T21:35:21.000000Z',
     'deleted_at' => NULL,
     'models_name' => '51',
     'name' => 'id',
     'createvalidator' => 'max:88888888888888',
     'updatevalidator' => 'max:88888888888888',
-    'type' => 'text',
+    'type' => 'hidden',
     'modeldata' => 1,
     'tablehead' => 0,
     'formdata' => 0,
@@ -189,14 +203,58 @@ class Component extends Model
     'sortale' => NULL,
     'searchableforms' => NULL,
   ),
+  'publish' => 
+  array (
+    'id' => 1040,
+    'created_at' => '2023-01-17T11:23:44.000000Z',
+    'updated_at' => '2023-01-17T12:03:11.000000Z',
+    'deleted_at' => NULL,
+    'models_name' => '51',
+    'name' => 'publish',
+    'createvalidator' => 'max:191',
+    'updatevalidator' => 'max:191',
+    'type' => 'hidden',
+    'modeldata' => 1,
+    'tablehead' => 1,
+    'formdata' => 0,
+    'fillable' => 1,
+    'formclass' => 'hide',
+    'defaultvalue' => NULL,
+    'options' => NULL,
+    'sortale' => 0,
+    'searchableforms' => 0,
+  ),
+  'modules_title' => 
+  array (
+    'id' => 1048,
+    'created_at' => '2023-01-18T22:45:53.000000Z',
+    'updated_at' => '2023-01-18T22:49:49.000000Z',
+    'deleted_at' => NULL,
+    'models_name' => '51',
+    'name' => 'modules_title',
+    'createvalidator' => 'max:213',
+    'updatevalidator' => 'max:213',
+    'type' => 'select',
+    'modeldata' => 1,
+    'tablehead' => 1,
+    'formdata' => 1,
+    'fillable' => 1,
+    'formclass' => 'col-lg-2',
+    'defaultvalue' => NULL,
+    'options' => '\\Madan\\Dcrud\\Models\\Modules::pluck("title","id")->prepend("Select One...","");',
+    'sortale' => NULL,
+    'searchableforms' => NULL,
+  ),
 );
 		public static function getSelectData(){
 			$options=[];
-		 $options["cactions_name"]=\Madan\Dcrud\Models\Cactions::pluck("name","id")->prepend("Select One...","");;
+		 $options["type"]=['page'];$options["cactions_name"]= \Madan\Dcrud\Models\Cactions::pluck("name","id")->prepend("Select One...","");;$options["modules_title"]=\Madan\Dcrud\Models\Modules::pluck("title","id")->prepend("Select One...","");;
 	
 
 		return $options;
 		}
-		
+		public static function updateComponent($id){                     echo 'jjooooo';                     $postdata= Component::where('id',$id)->first(); 		          if($postdata['type']=='static'){            \Madan\Dcrud\MainController::generateFile($postdata);               }else if($postdata['type']=='file'){            $this->generateFileImage($postdata);        }        else{            \Madan\Dcrud\MainController::generateCO($postdata);   \Artisan::call('view:clear');  $comp= Component::findOrFail($req->id);
+                $comp->type= 'gg';
+                $comp->save();                } 		                 }
     
 }

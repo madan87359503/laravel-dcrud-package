@@ -84,7 +84,7 @@ class Rolemodel extends Model
     'fillable' => 1,
     'formclass' => 'col-lg-2',
     'defaultvalue' => NULL,
-    'options' => '\\App\\Models\\Models::pluck("name","id")->prepend("Select One...","")',
+    'options' => '\\Madan\\Dcrud\\Models\\Models::pluck("name","id")->prepend("Select One...","")',
     'sortale' => NULL,
     'searchableforms' => NULL,
   ),
@@ -133,7 +133,7 @@ class Rolemodel extends Model
 );
 		public static function getSelectData(){
 			$options=[];
-		 $options["models_name"]=\App\Models\Models::pluck("name","id")->prepend("Select One...","");$options["role_name"]=\App\Models\Role::pluck("name","id")->prepend("Select One...","");
+		 $options["models_name"]=\Madan\Dcrud\Models\Models::pluck("name","id")->prepend("Select One...","");$options["role_name"]=\App\Models\Role::pluck("name","id")->prepend("Select One...","");
 	
 
 		return $options;

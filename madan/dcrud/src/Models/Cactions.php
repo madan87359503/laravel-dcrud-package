@@ -161,7 +161,7 @@ class Cactions extends Model
 );
 		public static function getSelectData(){
 			$options=[];
-		 $options["controllers_name"]=\Madan\Dcrud\Models\Controllers::pluck("name","id")->prepend("Select One...","");$options["role_name"]=\Madan\Dcrud\Models\Role::pluck("name","id")->prepend("Select One...","");$options["component_name"]=\Madan\Dcrud\Models\Component::pluck("name","id")->prepend("Select One...","");
+		 $options["controllers_name"]=\Madan\Dcrud\Models\Controllers::pluck("name","id")->prepend("Select One...","");$options["role_name"]= \Spatie\Permission\Models\Role::pluck("name","id")->prepend("Select One...","");$options["component_name"]=\Madan\Dcrud\Models\Component::pluck("name","id")->prepend("Select One...","");
 	
 
 		return $options;
